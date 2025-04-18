@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Virtual Computer Keyboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .keyboard {
+      display: inline-block;
+      background: #222;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .key {
+      background: #444;
+      color: #fff;
+      border: 1px solid #666;
+      border-radius: 5px;
+      padding: 15px 10px;
+      margin: 3px;
+      width: 40px;
+      text-align: center;
+      user-select: none;
+      transition: 0.1s;
+    }
+
+    .key.pressed {
+      background: #0a0;
+      color: #fff;
+      box-shadow: 0 0 5px #0f0;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Virtual Computer Keyboard</h1>
+  <div class="keyboard" id="keyboard">
+    <div class="row">
+      <div class="key">Esc</div><div class="key">F1</div><div class="key">F2</div><div class="key">F3</div><div class="key">F4</div>
+      <div class="key">F5</div><div class="key">F6</div><div class="key">F7</div><div class="key">F8</div><div class="key">F9</div>
+      <div class="key">F10</div><div class="key">F11</div><div class="key">F12</div>
+    </div>
+    <div class="row">
+      <div class="key">~</div><div class="key">1</div><div class="key">2</div><div class="key">3</div><div class="key">4</div>
+      <div class="key">5</div><div class="key">6</div><div class="key">7</div><div class="key">8</div><div class="key">9</div>
+      <div class="key">0</div><div class="key">-</div><div class="key">=</div><div class="key">Back</div>
+    </div>
+    <div class="row">
+      <div class="key">Tab</div><div class="key">Q</div><div class="key">W</div><div class="key">E</div><div class="key">R</div>
+      <div class="key">T</div><div class="key">Y</div><div class="key">U</div><div class="key">I</div><div class="key">O</div>
+      <div class="key">P</div><div class="key">[</div><div class="key">]</div><div class="key">\</div>
+    </div>
+    <div class="row">
+      <div class="key">Caps</div><div class="key">A</div><div class="key">S</div><div class="key">D</div><div class="key">F</div>
+      <div class="key">G</div><div class="key">H</div><div class="key">J</div><div class="key">K</div><div class="key">L</div>
+      <div class="key">;</div><div class="key">'</div><div class="key">Enter</div>
+    </div>
+    <div class="row">
+      <div class="key">Shift</div><div class="key">Z</div><div class="key">X</div><div class="key">C</div><div class="key">V</div>
+      <div class="key">B</div><div class="key">N</div><div class="key">M</div><div class="key">,</div><div class="key">.</div>
+      <div class="key">/</div><div class="key">Shift</div>
+    </div>
+    <div class="row">
+      <div class="key">Ctrl</div><div class="key">Win</div><div class="key">Alt</div>
+      <div class="key" style="flex: 1;">Space</div>
+      <div class="key">Alt</div><div class="key">Fn</div><div class="key">Ctrl</div>
+    </div>
+  </div>
+
+  <div id="output">Press any key on your keyboard!</div>
+
+  <script>
+    const keys = document.querySelectorAll('.key');
+    const output = document.getElementById('output');
+
+    document.addEventListener('keydown', e => {
+      const pressedKey = e.key.length === 1 ? e.key.toUpperCase() : e.key;
+      output.textContent = `You pressed: "${pressedKey}"`;
+
+      keys.forEach(k => {
+        if (k.textContent.toUpperCase() === pressedKey.toUpperCase()) {
+          k.classList.add('pressed');
+        }
+      });
+    });
+
+    document.addEventListener('keyup', () => {
+      keys.forEach(k => k.classList.remove('pressed'));
+    });
+  </script>
+
+</body>
+</html>
